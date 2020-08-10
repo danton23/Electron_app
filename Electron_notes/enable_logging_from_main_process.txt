@@ -1,0 +1,8 @@
+There exist many supposed fixes for this bug - which prevents console.log() from appearing when called from main - and which appears to
+affect Windows 8 only.
+
+The only CONSISTENT way i've found to fix this is to go into the node_modules folder then electron then find the electron.exe file
+
+Right click it and select properties.Then  select the compatibility tab and choose to run in compatibility mode for Windows 7 
+
+The logs from main should now appear in terminal - whilst those from renderer windows appear in the Dev tools in the Chromium browser.

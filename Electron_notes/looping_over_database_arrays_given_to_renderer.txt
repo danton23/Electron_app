@@ -1,0 +1,25 @@
+When you are trying to access arrays (passed as objects, I think) that have been taken from database (in main process) and handed to renderer
+
+Here is an example of how to do this inside a script in head :
+    document.addEventListener("DOMContentLoaded", function(){ //wrap in function that checks DOM is loaded first
+        ipc.send("Logon_loaded") //send a function to main to tell that Logon is loaded (name arbitray)
+        ipc.on("Fname", function(evt,result){ // ipc will then send back a function (here called Fname) with a variable that contains the
+                                              //data extracted from the db (here using the knex library)
+                                              //within this function you can now access this data via the specified variable name (here - result)
+
+
+
+After you have accessed them  you will probably want to loop through:
+     
+    This syntax seems to work:
+
+                             for (var i in result[0]){
+            console.log(i)
+
+          };
+
+Note: Because we are dealing with a type of object, rather than pure array, the variables are all stored under a particular Index (here 0 - possibly
+
+this would be multiple if it was more nested) unless you use their key names (i.e ListOne, ListTwo etc) you must use the above syntax, or similar
+
+to access them as they are NOT indexed in the normal way.
