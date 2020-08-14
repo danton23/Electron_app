@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1,">
+    <title> Trello Clone </title>
+    <link href='style.css'rel="stylesheet">
+    <link href='css/all.css' rel="stylesheet">
+    <script src="js/j-query-3.5.js"></script>
+    <script>
+     const electron=require("electron");
+     const ipc = electron.ipcRenderer;
+     const prompt = require('electron-prompt')
+      document.addEventListener("DOMContentLoaded", function(){
+        ipc.send("Logon_loaded")
+        ipc.on("Fname", function(evt,result){ //this will send db results back from main
+          // alert(result[0].Password.toString()); This works but taken out for debuggin
+          //Note need to do below code in order for javascript to interact with elements in the DOM
+          create1=document.getElementById("create1")
+          create2=document.getElementById("create2")
+          create3=document.getElementById("create3")
+          create4=document.getElementById("create_four")
+          list1=document.getElementById("list1")
+          list2=document.getElementById("list2")
+          list3=document.getElementById("list3")
+          list4=document.getElementById("list4")
+          list1_1=document.getElementById("list1_1")
+          list1_2=document.getElementById("list1_2")
+          
+          list1_3=document.getElementById("list1_3")
+          list1_4=document.getElementById("list1_4")
+          list1_5=document.getElementById("list1_5")
+          list1_6=document.getElementById("list1_6")
+          list2_1=document.getElementById("list2_1")
+          list2_2=document.getElementById("list2_2")
+          list2_3=document.getElementById("list2_3")
+          list2_4=document.getElementById("list2_4")
+          list2_5=document.getElementById("list2_5")
+          list2_6=document.getElementById("list2_6")
+          list3_1=document.getElementById("list3_1")
+          list3_2=document.getElementById("list3_2")
+          list3_3=document.getElementById("list3_3")
+          list3_4=document.getElementById("list3_4")
+          list3_5=document.getElementById("list3_5")
+          list3_6=document.getElementById("list3_6")
+          list4_1=document.getElementById("list4_1")
+          list4_2=document.getElementById("list4_2")
+          list4_3=document.getElementById("list4_3")
+          list4_4=document.getElementById("list4_4")
+          console.log("result stuff below")
+          console.log(result)
+          console.log(result.length)
+
+          for (var i in result[0]){
+            console.log(i)
+
+          };
+          var ob = "<p> <i class= 'fas fa-plus' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>";
+          //for(var i=0; i)
+          if(result[0].List1_1){
+          
+            list1.style.display="block"
+           list1_1.innerHTML+=result[0].List1_1.toString()
+            list1_1.style.display="block"
+            parent=list1_1.parentNode
+            console.log(parent)
+            parent.style.display="block"
+            if (typeof result[0].List1_1 =="undefined"){
+              list1_1.insertAdjacentHTML( 'beforeend',"<p> <i class= 'fas fa-plus list_i' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+              list1_1.addEventListener("click", function(){
+            alert("item four clicked!")
+            prompt({
+    title: 'New List',
+    label: 'Please Enter New List Title:',
+    value: '',
+    inputAttrs: {
+        type: 'text'
+    },
+    type: 'input'
+})
+.then((r) => {
+    if(r === null) {
+        console.log('user cancelled');
+    } else {
+        console.log('result', r);
+    }
+    ipc.send("New_List",[ r, "List1_1"])
+          });
+})           
+}
+          
+          if(result[0].List1_2){
+           list1_2.innerHTML+=result[0].List1_2.toString()
+            list1_2.style.display="block"
+            parent=list1_2.parentNode
+            parent.style.display="block"
+            
+            if (typeof result[0].List1_3 =="undefined"){
+              console.log("undefined")
+              list1_2.insertAdjacentHTML( 'beforeend',"<p> <i class= 'fas fa-plus list_i' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+             
+            }
+          }
+          if(result[0].List1_3){
+            list1_3.innerHTML+=result[0].List1_3.toString()
+            list1_3.style.display="block"
+            list1_3.style.display="block"
+            parent=list1_3.parentNode
+            console.log(parent)
+            parent.style.display="block"
+            if (typeof result[0].List1_4 =="undefined"){
+              console.log("undefined")
+              list_1_3.insertAdjacentHTML( 'beforeend',"<p> <i class= 'fas fa-plus list_i' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+             
+            }
+          }
+          if(result[0].List1_4){
+            list1_4.style.display="block"
+            list1_4.innerHTML+=result[0].List1_4.toString()
+            parent=list1_4.parentNode
+            console.log(parent)
+            parent.style.display="block"
+    
+             if (typeof result[0].List1_5 =="undefined"){
+              console.log("undefined")
+              list1_4.insertAdjacentHTML( 'afterend',"<p> <i class= 'fas fa-plus list_i' id='Four' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+             
+             
+            }
+
+          }
+          if(result[0].List1_5){
+            list1_5.style.display="block"
+            list1_5.innerHTML+=result[0].List1_5.toString()
+            parent=list1_5.parentNode
+            console.log(parent)
+            parent.style.display="block"
+            console.log("In LIst 1_5")
+            console.log("!<!<!<!<!<!<")
+    
+             if (result[0].List16){
+              console.log("List 6 exists")
+              list1_5.insertAdjacentHTML( 'afterend',"<p> <i class= 'fas fa-plus list_i' id='Four' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+              list1_5.addEventListener("click", function(){
+            alert("item 1_5 clicked!")
+            prompt({
+    title: 'New Item',
+    label: 'Please Enter New Item:',
+    value: '',
+    inputAttrs: {
+        type: 'text'
+    },
+    type: 'input'
+})
+.then((r) => {
+    if(r === null) {
+        console.log('user cancelled');
+    } else {
+        console.log('result', r);
+    }
+    col="List16"
+    
+    ipc.send("New_List",[ r, col])
+          });
+})           
+          }
+             
+            }
+            if(result[0].List16){
+              console.log("List16 exists!")
+            list1_6.style.display="block"
+            list1_6.innerHTML+=result[0].List16.toString()
+            parent=list1_6.parentNode
+            console.log(parent)
+            parent.style.display="block"
+    
+            }
+            else{
+              console.log("List16 doesn't exist")
+            }
+          if(result[0].List2_1){
+          
+          list2.style.display="block"
+         list2_1.innerHTML+=result[0].List2_1.toString()
+          list2_1.style.display="block"
+          parent=list2_1.parentNode
+          console.log(parent)
+          parent.style.display="block"
+          if (!result[0].List1_2){
+           console.log("")
+          }
+          else{
+            console.log("Doesnt exist")
+          }
+        }
+        if(result[0].List2_2){
+         list2_2.innerHTML+=result[0].List2_2.toString()
+          list2_2.style.display="block"
+          parent=list2_2.parentNode
+          parent.style.display="block"
+          
+          if (typeof result[0].List2_3 =="undefined"){
+            console.log("undefined")
+            list2_2.insertAdjacentHTML( 'beforeend',"<p> <i class= 'fas fa-plus list_i' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+           
+          }
+        }
+        if(result[0].List2_3){
+          list2_3.innerHTML+=result[0].List2_3.toString()
+          list2_3.style.display="block"
+          list2_3.style.display="block"
+          parent=list2_3.parentNode
+          console.log(parent)
+          parent.style.display="block"
+          if (typeof result[0].List2_4 =="undefined"){
+            console.log("undefined")
+            list2_3.insertAdjacentHTML( 'beforeend',"<p> <i class= 'fas fa-plus list_i' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+           
+          }
+        }
+        if(result[0].List2_4){
+          list2_4.style.display="block"
+          list2_4.innerHTML+=result[0].List2_4.toString()
+          parent=list2_4.parentNode
+          console.log(parent)
+          parent.style.display="block"
+  
+           if (typeof result[0].List2_20 =="undefined"){
+            console.log("undefined")
+            list2_4.insertAdjacentHTML( 'afterend',"<p> <i class= 'fas fa-plus list_i' id='Four' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+            Four=document.getElementById('Four')
+           
+          }
+        }
+        if(result[0].List2_5){
+          list2_5.style.display="block"
+          list2_5.innerHTML+=result[0].List2_5.toString()
+          parent=list2_5.parentNode
+          console.log(parent)
+          parent.style.display="block"
+  
+           if (typeof result[0].List2_6 =="undefined"){
+            console.log("undefined")
+            list2_5.insertAdjacentHTML( 'afterend',"<p> <i class= 'fas fa-plus list_i' id='Four' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+            Four=document.getElementById('Four')
+           
+          }
+        }
+        if(result[0].List2_6){
+          list2_6.style.display="block"
+          list2_6.innerHTML+=result[0].List2_6.toString()
+          parent=list2_6.parentNode
+          console.log(parent)
+          parent.style.display="block"
+  
+        }
+        if(result[0].List3_1){
+          
+          list3.style.display="block"
+         list3_1.innerHTML+=result[0].List3_1.toString()
+          list3_1.style.display="block"
+          parent=list3_1.parentNode
+          console.log(parent)
+          parent.style.display="block"
+          if (!result[0].List3_2){
+           console.log("")
+          }
+          else{
+            console.log("Doesnt exist")
+          }
+        }
+        if(result[0].List3_2){
+         list3_2.innerHTML+=result[0].List3_2.toString()
+          list3_2.style.display="block"
+          parent=list3_2.parentNode
+          parent.style.display="block"
+          
+          if (typeof result[0].List3_3 =="undefined"){
+            console.log("undefined")
+            list3_2.insertAdjacentHTML( 'beforeend',"<p> <i class= 'fas fa-plus list_i' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+           
+          }
+        }
+        if(result[0].List3_3){
+          list3_3.innerHTML+=result[0].List3_3.toString()
+          list3_3.style.display="block"
+          list3_3.style.display="block"
+          parent=list3_3.parentNode
+          console.log(parent)
+          parent.style.display="block"
+          if (typeof result[0].List3_4 =="undefined"){
+            console.log("undefined")
+            list3_3.insertAdjacentHTML( 'beforeend',"<p> <i class= 'fas fa-plus list_i' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+           
+          }
+        }
+        if(result[0].List3_4){
+          list3_4.style.display="block"
+          list3_4.innerHTML+=result[0].List2_4.toString()
+          parent=list3_4.parentNode
+          console.log(parent)
+          parent.style.display="block"
+  
+           if (typeof result[0].List3_5 =="undefined"){
+            console.log("undefined")
+            list2_4.insertAdjacentHTML( 'afterend',"<p> <i class= 'fas fa-plus list_i' id='Four' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+            Four=document.getElementById('Four')
+           
+          }
+        }
+        if(result[0].List3_5){
+          list3_5.style.display="block"
+          list3_5.innerHTML+=result[0].List3_5.toString()
+          parent=list3_5.parentNode
+          console.log(parent)
+          parent.style.display="block"
+  
+           if (typeof result[0].List3_6 =="undefined"){
+            console.log("undefined")
+            list3_5.insertAdjacentHTML( 'afterend',"<p> <i class= 'fas fa-plus list_i' id='Four' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+            Four=document.getElementById('Four')
+           
+          }
+          var next=document.getElementById("list3_5").nextSibling
+          console.log("Next >>>")
+          console.log(next)
+          if(next.nextSibling==null){
+            console.log("null")
+          }
+          else{
+            console.log("not null")
+          }
+        }
+        if(result[0].List3_6){
+          list3_6.style.display="block"
+          list3_6.innerHTML+=result[0].List3_6.toString()
+          parent=list3_6.parentNode
+          console.log(parent)
+          parent.style.display="block"
+          var next2=document.getElementById("list3_6").nextSibling
+          console.log("Next 2 >>>")
+          console.log(next2)
+          if(next2.nextSibling==null){
+            console.log("null")
+            list3_6.insertAdjacentHTML( 'afterend',"<p> <i class= 'fas fa-plus list_i' id='3_6' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+            icon=document.getElementById('3_6')
+            icon.addEventListener('click',event=>{
+              r="Uncle_crackar"
+              ipc.send("New_List", r)
+            })
+          }
+  
+
+        }
+          
+          document.querySelectorAll('.list_i').forEach(item => {
+                        item.addEventListener('click', event => {
+                     console.log("clicked")
+       })
+           })
+        }
+        // TESTING Dynamic APPROACH
+        items={"list4_1":list4_1, "list4_2":list4_2, "list4_3":list4_3, "list4_4":list4_4}
+        console.log("In LIST FOUR")
+        console.log(result[0].List4_1)
+        console.log("<< 4_1")
+        List_Four=["list4_1","list4_2","list4_3","list4_4"]
+        lists={list1:"list1_1", list2:"List2_1",list3:"List3_1", list4:"list4_1"}
+        create_items={list1:create1, list2:create2,list3:create3,list4:create4}
+        for(const[key, val] of Object.entries(lists)){
+           console.log(key, val)
+            if (result[0][val]){
+              console.log("VAL +" + val + "FOUND!")
+              listkey=key
+              console.log("listkey:" + listkey)
+              listkey.style="display:block"
+              for(const[key2, val2] of Object.entries(create_items)){
+                console.log(key+"KEYKEKYEYKEEKEKEKYE")
+                if(key==key2){
+                  console.log(key +key2 + "<<<<key and key 2")
+                  console.log("val found"+ val2)
+                  val2.style="display:none"
+
+                }
+            }
+            }
+        //list_4.style.display="block"
+        
+        for(var i=0; i < List_Four.length;i++){
+         item=List_Four[i]
+         nextitem=List_Four[i+1]
+         console.log(`result[0].${nextitem}`)
+         console.log("<<< next item")
+
+         for(const[key, val] of Object.entries(items)){
+           console.log(key, val)
+            if(key == item){
+              usekey=key
+              useval=val
+            }
+         }
+         console.log(item + "<<<item")
+         if(result[0][item]){
+           
+           
+          
+          useval.style.display="block"
+          useval.innerHTML+=result[0][item].toString()
+         
+          parent=useval.parentNode
+        
+          parent.style.display="block"
+          
+          last_char=usekey.slice(-1)
+        
+          if(last_char=="6"){
+            
+            
+            console.log("last_char:" + last_char)
+          }
+         
+            if(!(result[0][nextitem])){
+             console.log("EMPTY!!!!!!")
+             useval.insertAdjacentHTML( 'afterend',"<p> <i class= 'fas fa-plus list_i' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+             nextsib=useval.nextSibling
+             nextsib.addEventListener('click',function(){
+              prompt({
+              title: 'New Item',
+              label: 'Please Enter New Item:',
+              value: '',
+              inputAttrs: {
+                  type: 'text'
+              },
+              type: 'input'
+          })
+          .then((r) => {
+              if(r === null) {
+                  console.log('user cancelled');
+              } else {
+                  console.log('result', r);
+                  ipc.send("New_List",[ r, nextitem])
+              }
+              
+              
+              
+                    });
+                  })}}}}},)})
+    </script>
+ </head>
+ <body>
+ 	
+ <div class="top-nav">
+ 	<ul>
+ 	<li> Home </li>
+ 	<li> New </li>
+ 	<li> Options <ul> <li id="Background"> Background </li> <li> Delete </li> </ul></li>
+ </ul>
+  <li style="float:right"> <i class=" fas fa-plus"></i></li>
+
+
+ </div> <!--- Top Nav ends --->
+ <div class="wrapper">
+  <div class="container">
+    <p id="create1" style="display:block"> <i class=" fas fa-plus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+  <div class="list" id="list1" style="display:none">
+  	<h1> List One </h1>
+    <div class="item" style="display:none" >
+    	<p id="list1_1" style="display:none">  <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i></p>
+    </div>
+    <div class="item" style="display:none" >
+    	<p id="list1_2" style="display:none"><i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+    </div>
+    <div class="item" style="display:none">
+    	<p id="list1_3" style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i></p>
+    </div>
+    <div class="item" style="display:none" >
+    	<p id="list1_4" style="display:none"><i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+    </div>
+    <div class="item" style="display:none" >
+    	<p id="list1_5" style="display:none"><i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+    </div>
+    <div class="item" style="display:none" >
+    	<p id="list1_6" style="display:none"><i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+    </div>
+    
+  </div> <!--- Change below to only display when there are list items-->
+  </div>
+  <div class="container">
+    <p id="create2" style="display:block"> <i class=" fas fa-plus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+  <div class="list" id="list2" style="display:none">
+  	<h1> List Two </h1>
+      <div class="item" id="list2_1" style="display: none;">
+      	<p id="item2" style="display:none"> <i class=" fas fa-minus list_i" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+      </div>
+      <div class="item" id="list2_2" style="display: none;">
+      	<p id="item2" style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+      </div>
+      <div class="item" id="list2_3" style="display: none;">
+      	<p id="item2" style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+      </div>
+      <div class="item" id="list2_4" style="display: none;">
+      	<p id="item2" style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+      </div>
+      <div class="item" id="list2_5" style="display: none;">
+      	<p id="item2" style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+      </div>
+      <div class="item" id="list2_6" style="display: none;">
+      	<p id="item2" style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+      </div>
+      </div>
+       
+      
+  </div>]
+  <div class="container">
+    <p id="create3" style="display:block"> <i class=" fas fa-plus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+
+  <div class="list"id="list3"style="display:none">
+    <h1> List Three </h1>
+    <div class="item" id="list3_1" style="display: none;">
+      <p id="item2" style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+    </div>
+    <div class="item" id="list3_2" style="display: none;">
+      <p id="item2" style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+    </div>
+    <div class="item" id="list3_3" style="display: none;">
+      <p id="item2" style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+    </div>
+    <div class="item" id="list3_4" style="display: none;">
+      <p id="item2" style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+    </div>
+    <div class="item" id="list3_5" style="display: none;">
+      <p id="item2" style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+    </div>
+    <div class="item" id="list3_6" style="display: none;">
+      <p id="item2" style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+    </div>
+  </div>
+  </div>
+  <div class="container">
+
+    <p id="create_four" style="display:block"> <i class=" fas fa-plus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+  <div class="list" id="list_4" style="display:none">
+    <h1> List Four </h1>
+    <div class="item" id="list4_1" style="display: none;">
+      <p id="item2" style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+    </div>
+    <div class="item" id="list4_2" style="display: none;">
+      <p id="item2" style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+    </div>
+    <div class="item" id="list4_3" style="display: none;">
+      <p id="item2" style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+    </div>
+    <div class="item" id="list4_4"style="display:none">
+      <p id="item2" style="display: none;"><i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
+    </div>
+    </div>
+    
+       
+      
+
+   
+  </div>
+</div>
+ </div> 
+ </div> 
+ <footer>
+
+ </footer> 
+
+
+
+ </body>
+
+ <script> 
+  
+  
+   document.getElementById("Background").addEventListener("click", function(){
+ 	
+ 	var img = document.body
+    style = img.currentStyle || window.getComputedStyle(img, false),
+    bi = style.backgroundImage.slice(4, -1);
+    bislice= bi.split("/") // splits the string into an array where each element has / as the delimited (this char is REMOVEd though)
+    newurl=""+bislice[9]; //takes the last TWO in the array - the end of the url file - and adds a / back in to make a proper file path
+    console.log(newurl);
+    str = newurl.replace(/^"|"$/g, ''); // Regex strips double quotes
+    
+    console.log(str)
+ 	if (str==="earth.jpg"){
+ 	console.log("detected Earth");
+ 	document.body.style.backgroundImage="url(imgs/trees.jpg)";}
+ 	else if (str=== "trees.jpg"){
+    document.body.style.backgroundImage="url(imgs/evening.jpg)";
+    console.log("detected trees")
+    console.log(document.body.style.backgroundImage)
+ 	}
+ 	else if (str=="evening.jpg") {
+ 		document.body.style.backgroundImage="url(imgs/space.jpg)"
+ 	}
+ 	else if (str=="space.jpg"){
+         document.body.style.backgroundImage="url(imgs/trees.jpg)"
+ 	}
+ 	
+
+ }); </script>
+         
+ </html>
