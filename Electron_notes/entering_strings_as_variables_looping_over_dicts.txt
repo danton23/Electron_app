@@ -1,0 +1,30 @@
+Trying to enter strings as variables can cause many problems. 
+
+One solution is to create a dictionary with strings that may be used and the corresponding variable names
+
+E.G 
+
+ items={"String_One": String_One, "String_Two":String_Two} etc
+
+We can then directly use the String we are working with (i.e as a result of user input) in order to 'fetch' the appropriate
+
+value from the dict
+
+for(const[key, val] of Object.entries(items)){   // NOTE this is the syntax for looping over dict in JS
+           console.log(key, val)
+            if(key == item){
+              useval=val
+            }
+         }
+
+Now we can use the var 'useval' directly to call the appropriate variable (NOT string) on our function, obj, method etc
+
+Another important tool that can be used is string literals.
+
+In JS these are enclosed by back-ticks (NOT single quotes) i.e `  (code)    `
+
+Within this string literal we can pass in variables like so `Some code as a string ${var}` so long as the var is already defined
+
+I believe we can ALSO use any other characters without escaping (i.e " " to quote things) EXCEPT for the backslash itself which must be 
+
+escaped.

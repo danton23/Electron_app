@@ -1,0 +1,9 @@
+If you wish to use a string to make a call on a DB (i.e with knex) this may cause issues as it is expecting something more like a variable
+
+In order to get around this use this syntax:
+
+       var useitem= result[0][item]
+
+Where result[0] is the table and [item] is the string value (e.g "POSTS") we wish to run a query with 
+
+Note the full-stops vanish here result[0].item is NOT correct
