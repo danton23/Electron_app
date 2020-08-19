@@ -101,12 +101,13 @@
                                 }
                                   
                  }
+                  
                    if(result[0][item]){
                         console.log(item + "NOT empty")
                         console.log("useval =" +useval)
                         useval.style="display:block"
                         useval.innerHTML=result[0][item]
-                        useval.insertAdjacentHTML( 'afterend',"<p> <i class= 'fas fa-plus list_i' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+                        //useval.insertAdjacentHTML( 'afterend',"<p> <i class= 'fas fa-plus list_i' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
                         
                         try{
                         useval.parentNode.style="display:block"
@@ -122,12 +123,20 @@
                         console.log(nextitem[4] )
                         console.log(item[4])
                         console.log("<<< nexitem and item 4")
-                        if(nextitem[4]!=item[4] && item[6]!=6){
+                       //   // this should check if current item and next item are NOT in the same list AND that current item does not have 6 at end (i.e is last permissible item)
+                        console.log("<><><><><")
+                        console.log("nextitem:" + nextitem)
+                        console.log("<><><><<>><")
+                       if(result[0][nextitem]=="" && item[6]!="6"){
+                        useval.insertAdjacentHTML( 'afterend',`<p> <i class= 'fas fa-plus item_plus' id= ${nextitem} style='float:left;text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>`)
+                        useval.insertAdjacentHTML( 'afterend',"<p> <i class= 'fas fa-minus list_i' style='float:right;text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+                       }
+                       if(item[6]=="6"){
                           console.log(nextitem[4] + "<<next item [4")
                           console.log(item[4]+"<<item[4")
                           console.log(item[6] + "<<<item[-1]")
                           console.log('unequal and item last not 6')
-                          useval.insertAdjacentHTML( 'afterend',"<p> <i class= 'fas fa-plus list_i' style='text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>")
+                          
                           
                           
 
@@ -140,6 +149,31 @@
                 
           
             }
+            document.querySelectorAll(".item_plus").forEach(item=>{
+              item.addEventListener('click',function(){
+         prompt({
+         title: 'New Item',
+         label: 'Please Enter New Item:',
+         value: '',
+         inputAttrs: {
+             type: 'text'
+         },
+         type: 'input'
+     })
+     .then((r) => {
+         if(r === null) {
+             console.log('user cancelled');
+             console.log(item.id)
+             console.log("<<<<<< ITEM ID")
+         } else {
+             console.log('result', r);
+             console.log(item.id)
+             console.log("<<<<<< ITEM ID")
+             ipc.send("New_List",[ r, item.id])
+         }
+        })})
+
+            })
         //list_4.style.display="block"
         
         
