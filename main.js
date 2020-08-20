@@ -60,6 +60,19 @@ app.on("ready", () => {
      result.then(function(rows){
       mainWindow.webContents.send("Fname", rows);
     })
+    ipcMain.on("Remove_list",(event,val)=>{
+      console.log("in REMOVE LIST")
+      let result1 = knex.select('*').from("Users").where("Name", name)
+      result1.update(val,"")
+      .then(() => console.log(val + "cleared"))
+      mainWindow.loadURL ("file:///"+__dirname+"/index.html"); //reload the file to apply changes
+      mainWindow.once('ready-to-show', () => {mainWindow.show()})
+      let result = knex.select("list1_1","list1_2","list1_3","list1_4","list1_5","list1_6","list2_1","list2_2", "list2_3", "list2_4", "list2_5", "list2_6", "list3_1", "list3_2", "list3_3", "list3_4", "list3_5", "list3_6","list4_1","list4_2","list4_3","list4_4").from("Users").where("Name", name); //replace latter with fname variable somehow
+     // let result=knex.select("Name","Password").from("Users")  <-- this simple statement DOES work but removed for developement
+     result.then(function(rows){
+      mainWindow.webContents.send("Fname", rows);
+    })
+  })
     ipcMain.on("New_List",(event,args)=>{
       var val=args[0]
       var col=args[1]
@@ -74,6 +87,7 @@ app.on("ready", () => {
      result.then(function(rows){
       mainWindow.webContents.send("Fname", rows);
     })
+    
     ipcMain.on("Item_deleted",(event,val)=>{
      
 
