@@ -49,8 +49,66 @@
           list4_2=document.getElementById("list4_2")
           list4_3=document.getElementById("list4_3")
           list4_4=document.getElementById("list4_4")
-          
+        
         // TESTING Dynamic APPROACH
+        create_items=[create1,create2,create3,create_four]
+        for(var i = 0; i<create_items.length;i++){
+          elem=create_items[i]
+          elem.addEventListener('click', function(){
+            prompt({
+         title: 'New Item',
+         label: 'Please Enter A Title for your New List:',
+         value: '',
+         inputAttrs: {
+             type: 'text'
+         },
+         type: 'input'
+     })
+     .then((r) => {
+         if(r === null) {
+             console.log('user cancelled');
+            
+         } else {
+             console.log('result', r);
+             console.log(elem.id)
+             console.log(elem.id[6])
+             if(elem.id[6]=="_"){
+               console.log("In 1")
+               create1.style="display:none"
+               list1.style="display:block"
+               one_title.innerHTML=r
+             }
+            
+             // ipc.send("New_List",[ r, item.id]) CHANGE THIS TO ADD NEW LIST
+         }
+     })
+     prompt({
+         title: 'New Item',
+         label: 'Please Enter A New Item',
+         value: '',
+         inputAttrs: {
+             type: 'text'
+         },
+         type: 'input'
+     })
+     .then((r) => {
+         if(r === null) {
+             console.log('user cancelled');
+            
+         } else {
+             if(elem.id==create1){
+               console.log("FIRST!!!")
+             }
+             console.log('result', r);
+             
+            
+              ipc.send("New_List",[ r, "list1_1"]) 
+         }
+     })
+
+
+          })
+        }
         items={"list1_1":list1_1,"list1_2":list1_2,"list1_3":list1_3,"list1_4":list1_4,"list1_5":list1_5,"list1:6":list1_6,"list2_1":list2_1,"list2_2":list2_2,"list2_3":list2_3,"list2_4":list2_4,"list2_5":list2_5,"list2_6":list2_6,"list3_1":list3_1,"list3_2":list3_2,"list3_3":list3_3,"list3_4":list3_4,"list3_5":list3_5,"list3_6":list3_6,"list4_1":list4_1, "list4_2":list4_2, "list4_3":list4_3, "list4_4":list4_4}
         console.log("In LIST FOUR")
         console.log(result[0].List4_1)
@@ -88,7 +146,13 @@
                   
                 }
             }
+            
             }
+          }
+          alert(result[0]["list1_title"])
+          alert(result[0]["list1_1"])
+          if (result[0]["list1_title"]!==""){
+            title_one.innerHTML=result[0]["list1_title"]
           }
             for(var i=0; i < All.length;i++){
                  item=All[i]
@@ -149,6 +213,24 @@
                 
           
             }
+            title_list=["title_one", "title_two","title_three", "title_four"]
+            first_items=["list1_1", "list2_1", "list3_1","list4_1"]
+            for(var i=0; i< title_list.length;i++){
+            name=title_list[i]
+            first=first_items[i]
+            alert("name =" + name)
+            alert("first = "+ first)
+             alert("First ->")
+             alert(result[0][first])
+            current=result[0][first]
+            title=document.getElementById(name)
+            
+            if (title != "" && current == "" ){   // <<<<!!!<<<! Currentl WORKING here !!!!<<< 
+              
+              title.insertAdjacentHTML( 'afterend',`<p> <i class= 'fas fa-plus item_plus'id='list1_1' style='float:left;text-align:center;size:2px;color:black;margin-right:2px; padding:0' ></i></p>`)
+            }
+            }
+
             document.querySelectorAll(".item_plus").forEach(item=>{
               item.addEventListener('click',function(){
          prompt({
@@ -202,7 +284,7 @@
   <div class="container">
     <p id="create1" style="display:block"> <i class=" fas fa-plus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
   <div class="list" id="list1" style="display:none">
-  	<h1> List One </h1>
+  	<h1 id="title_one"> List One </h1>
     <div class="item" id="list1_1" style="display:none" >
     	<p  style="display:none">  <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i></p>
     </div>
@@ -227,7 +309,7 @@
   <div class="container">
     <p id="create2" style="display:block"> <i class=" fas fa-plus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
   <div class="list" id="list2" style="display:none">
-  	<h1> List Two </h1>
+  	<h1 id="title_two"> List Two </h1>
       <div class="item" id="list2_1" style="display: none;">
       	<p style="display:none"> <i class=" fas fa-minus list_i" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
       </div>
@@ -254,7 +336,7 @@
     <p id="create3" style="display:block"> <i class=" fas fa-plus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
 
   <div class="list"id="list3"style="display:none">
-    <h1> List Three </h1>
+    <h1 id="title_three"> List Three </h1>
     <div class="item" id="list3_1" style="display: none;">
       <p  style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
     </div>
@@ -279,7 +361,7 @@
 
     <p id="create_four" style="display:block"> <i class=" fas fa-plus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
   <div class="list" id="list_4" style="display:none">
-    <h1> List Four </h1>
+    <h1 id = "title_four"> List Four </h1>
     <div class="item" id="list4_1" style="display: none;">
       <p id="item2" style="display:none"> <i class=" fas fa-minus" style="float:right;size:2px;color:black;margin-right:2px; padding:0" ></i> </p>
     </div>
